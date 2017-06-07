@@ -1,0 +1,15 @@
+{
+  "name": "Di Progressive Webapp",
+  "short_name": "di-pwa",
+  "start_url": "https://localhost:5555/",
+  "display": "browser",
+  "background_color": "#fff",
+  "description": "Di Progressive Web App",
+  "icons": [{
+    "src": "di48x45.png",
+    "sizes": "48x48",
+    "type": "image/png"
+  }],
+  "prefer_related_applications": false,
+  "theme_color": "#f7eae4"
+}
