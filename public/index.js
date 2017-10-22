@@ -19,4 +19,6 @@ if ("serviceWorker" in navigator) {
       // registration failed
       console.log("Registration failed with " + error);
     });
+}else{
+  console.log('Your browser does not support Service Workers!');
 }

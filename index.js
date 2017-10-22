@@ -1,6 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 const http2 = require("http2");
+//const path = require('path');
 
 const express = require("express");
 
@@ -13,10 +14,14 @@ require("express-http2-workaround")({
   app: app
 });
 
-// See documentations at http://blog.mgechev.com/2014/02/19/create-https-tls-ssl-application-with-express-nodejs/ (and maybe: https://www.akadia.com/services/ssh_test_certificate.html)
+// See documentations at http://blog.mgechev.com/2014/02/19/create-https-tls-ssl-application-with-express-nodejs/
+// https://www.openssl.org/docs/man1.0.2/apps/x509v3_config.html#Subject-Alternative-Name
+//(and maybe: https://www.akadia.com/services/ssh_test_certificate.html)
+// https://stackoverflow.com/questions/30957793/nodejs-ssl-bad-password-read
 const httpsOptions = {
-  key: fs.readFileSync(__dirname + "/cert/key.pem"),
-  cert: fs.readFileSync(__dirname + "/cert/cert.pem"),
+  key: fs.readFileSync(__dirname + "/key.pem"),
+  cert: fs.readFileSync(__dirname + "/cert.pem"),
+  passphrase: '1234'
 };
 
 const http2Server = http2.createServer(httpsOptions, app);
@@ -89,6 +94,7 @@ app.get("/", function(req, res) {
   <body>
   Ok, site is running over HTTP2!
   `;
+
   // for demo, prevent cache to display client side cache
   res.header('Cache-Control', 'no-cache, no-store');
   res.send(html);
